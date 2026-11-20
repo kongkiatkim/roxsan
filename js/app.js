@@ -179,21 +179,14 @@
   }
 
   /* ---------- Colour picker ---------- */
-  // The 12 RAL colours come from js/colors.js. The picker section exists on both model pages;
-  // the 2+2 page shows a recoloured photo, the 6+2 page shows a colour chip (data-img-base decides).
+  // The 12 RAL colours come from js/colors.js. Both model pages show a recoloured photo of the cart:
+  // the image src is data-img-base + colour id (made by tools/make_colors.py).
   function colorById(id) {
     for (var i = 0; i < COLORS.length; i++) if (COLORS[i].id === id) return COLORS[i];
     return COLORS[0];
   }
 
   function colorLabel(c) { return c.code + " · " + pick(c.name); }
-
-  // Text colour that stays readable on top of a colour fill.
-  function onColor(hex) {
-    var n = parseInt(hex.slice(1), 16);
-    var lum = (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255;
-    return lum > 0.62 ? "#0b2a5b" : "#ffffff";
-  }
 
   function renderSwatches() {
     var host = document.getElementById("swatches");
@@ -242,13 +235,6 @@
     nameEl.textContent = colorLabel(c);
     var img = document.getElementById("colorImg");
     if (img) img.alt = t("color.preview") + ": " + colorLabel(c);
-    var chip = document.getElementById("colorChip");
-    if (chip) {
-      chip.style.setProperty("--c", c.hex);
-      chip.style.color = onColor(c.hex);
-      chip.querySelector(".chip-code").textContent = c.code;
-      chip.querySelector(".chip-name").textContent = pick(c.name);
-    }
   }
 
   function selectColor(id) {

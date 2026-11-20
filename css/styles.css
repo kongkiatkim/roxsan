@@ -138,12 +138,6 @@ h2 { font-size: clamp(1.6rem, 4.4vw, 2.5rem); color: var(--navy); font-weight: 7
 .sw-name { font-size: .78rem; color: var(--muted); line-height: 1.25; }
 .swatch:hover { border-color: var(--sky); }
 .swatch[aria-checked="true"] { border-color: var(--navy); box-shadow: 0 0 0 2px var(--navy); }
-.color-chip {
-  aspect-ratio: 4 / 3; display: grid; place-content: center; text-align: center; gap: 4px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, .28), rgba(0, 0, 0, .10)), var(--c, #f6f6f6);
-}
-.chip-code { font: 700 clamp(1.6rem, 5vw, 2.4rem) var(--font); letter-spacing: .02em; }
-.chip-name { font-size: 1.1rem; font-weight: 500; }
 
 /* Cards */
 .cards { display: grid; gap: 16px; margin-top: 28px; }
