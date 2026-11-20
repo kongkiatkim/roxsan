@@ -229,9 +229,11 @@ body.lock { overflow: hidden; }
   .warranty-grid { grid-template-columns: repeat(3, 1fr); }
   .spec-row { grid-template-columns: 220px 1fr; gap: 20px; }
 }
-@media (min-width: 900px) {
+@media (min-width: 1100px) {
   .nav { display: flex; }
   .header-actions { margin-left: 0; }
+}
+@media (min-width: 900px) {
   .header-actions .btn { display: inline-flex; }
   .hero-inner { grid-template-columns: 1fr 1.1fr; gap: 24px; padding-block: 56px; }
   .facts-grid { grid-template-columns: repeat(4, 1fr); }
