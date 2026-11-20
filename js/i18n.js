@@ -103,6 +103,7 @@ window.I18N = {
     "footer.seller": "จัดจำหน่ายโดย VELOX",
     "footer.brand": "ROXSAN เป็นแบรนด์ของ RMA",
     "footer.other": "ดูรุ่น ROXSAN 2+2 (4 ที่นั่ง)",
+    "pdf.btn": "ดาวน์โหลด PDF",
     "sticky.cta": "ขอใบเสนอราคา",
     "noscript": "กรุณาเปิดใช้งาน JavaScript เพื่อดูเนื้อหาทั้งหมด"
   },
@@ -209,6 +210,7 @@ window.I18N = {
     "footer.seller": "Distributed by VELOX",
     "footer.brand": "ROXSAN is a brand of RMA",
     "footer.other": "See the ROXSAN 2+2 (4 seats)",
+    "pdf.btn": "Download PDF",
     "sticky.cta": "Request a quote",
     "noscript": "Please enable JavaScript to view the full content."
   }

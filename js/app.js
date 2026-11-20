@@ -55,7 +55,15 @@
     renderAccessories();
     updateColorName();
     renderContact();
+    renderPdfLinks();
     if (document.getElementById("lightbox").open) syncLightboxAlt();
+  }
+
+  // Point every PDF button at the catalogue in the language currently shown.
+  function renderPdfLinks() {
+    document.querySelectorAll("[data-pdf-th]").forEach(function (a) {
+      a.href = a.getAttribute("data-pdf-" + lang) || a.getAttribute("data-pdf-th");
+    });
   }
   window.setLang = setLang;
 
@@ -311,8 +319,16 @@
   initColors();
   initForm();
   initStickyCta();
+  // ?lang=en|th picks the language (used for sharing and to render the PDFs); otherwise the saved choice, else Thai.
+  var asked = /[?&]lang=(th|en)\b/.exec(location.search);
   var saved = storageGet();
-  setLang(saved === "en" ? "en" : "th");
+  setLang(asked ? asked[1] : (saved === "en" ? "en" : "th"));
+  // ?print=1 is used only to render the PDFs: load every photo now and open every spec group.
+  if (/[?&]print=1\b/.test(location.search)) {
+    document.documentElement.classList.add("print-mode");
+    document.querySelectorAll("img[loading]").forEach(function (i) { i.loading = "eager"; });
+    document.querySelectorAll(".spec-group").forEach(function (d) { d.open = true; });
+  }
   selectColor("white");
   initReveal();
 })();
