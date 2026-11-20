@@ -118,6 +118,8 @@ h2 { font-size: clamp(1.6rem, 4.4vw, 2.5rem); color: var(--navy); font-weight: 7
 /* White-background cut-outs: show the whole vehicle instead of cropping to the tile. */
 .gallery-cutout .g-item { background: #fff; }
 .gallery-cutout .g-item img { object-fit: contain; }
+.g-item.cut { background: #fff; }
+.g-item.cut img { object-fit: contain; }
 @media (min-width: 640px) { .gallery.gallery-2 { grid-template-columns: repeat(2, 1fr); } }
 .g-1 { grid-column: 1 / -1; aspect-ratio: 16/10; }
 .g-1 img { object-fit: contain; background: #fff; }
@@ -270,7 +272,7 @@ body.lock { overflow: hidden; }
   .section { padding-block: 20px; }
   .hero-inner { padding-block: 16px; }
   .card, .fact, .w-item, .g-item, .spec-group, .color-preview, .screen-img, .acc-list li { break-inside: avoid; }
-  .hero, .facts, .section.navy, .quote-grid { break-inside: avoid; }
+  .hero, .facts, .section.navy, .quote-grid, #colors { break-inside: avoid; }
   .hero-media img { max-height: 100mm; width: auto; max-width: 100%; margin-inline: auto; display: block; }
   .screen-img { max-height: 95mm; width: auto; max-width: 100%; }
   h2, h3, .eyebrow { break-after: avoid; }

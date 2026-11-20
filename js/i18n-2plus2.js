@@ -21,8 +21,7 @@ window.I18N_OVERRIDE = {
     "why.4.d": "ที่นั่งด้านหลัง 2 ที่นั่งแบบพับได้ และรองรับอุปกรณ์เสริมที่วางถุงกอล์ฟพร้อมมือจับ รวมถึงไฟ Ambient LED และ Soundbar",
     "specs.title": "สเปค ROXSAN 2+2",
     "acc.sub": "รายการที่รองรับสำหรับรุ่น 2+2 ราคาโปรดสอบถามฝ่ายขาย",
-    "form.msg": "สนใจ ROXSAN 2+2",
-    "footer.other": "ดูรุ่น ROXSAN 6+2 (8 ที่นั่ง)"
+    "form.msg": "สนใจ ROXSAN 2+2"
   },
   "en": {
     "meta.title": "ROXSAN 2+2 | 4-Seat Electric Golf Cart for Resorts",
@@ -44,8 +43,7 @@ window.I18N_OVERRIDE = {
     "why.4.d": "2 rear folding seats, plus support for the optional golf-bag rack with handle, as well as Ambient LED lighting and a soundbar.",
     "specs.title": "ROXSAN 2+2 specifications",
     "acc.sub": "Items supported on the 2+2. Ask sales for prices.",
-    "form.msg": "Interested in ROXSAN 2+2",
-    "footer.other": "See the ROXSAN 6+2 (8 seats)"
+    "form.msg": "Interested in ROXSAN 2+2"
   }
 };
 (function () {
