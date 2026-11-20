@@ -4,11 +4,12 @@
   var I18N = window.I18N;
   var CONTENT = window.CONTENT;
   var SITE = window.SITE;
-  var COLOR_IDS = ["white", "black", "grey", "powder", "turquoise"];
+  var COLORS = window.COLORS;
+  var COLOR_IDS = COLORS.map(function (c) { return c.id; });
   var STORE_KEY = "roxsan-lang";
 
   var lang = "th";
-  var colorId = "white";
+  var colorId = "ral9016";
   var lbIndex = 0;
   var lbOpener = null;
 
@@ -53,7 +54,9 @@
     applyI18n();
     renderSpecs();
     renderAccessories();
-    updateColorName();
+    renderSwatches();
+    renderFormColors();
+    selectColor(colorId);
     renderContact();
     renderPdfLinks();
     if (document.getElementById("lightbox").open) syncLightboxAlt();
@@ -176,13 +179,76 @@
   }
 
   /* ---------- Colour picker ---------- */
-  // The colour picker exists only on pages that have it (the 6+2 page); the quote form's colour list is on every page.
+  // The 12 RAL colours come from js/colors.js. The picker section exists on both model pages;
+  // the 2+2 page shows a recoloured photo, the 6+2 page shows a colour chip (data-img-base decides).
+  function colorById(id) {
+    for (var i = 0; i < COLORS.length; i++) if (COLORS[i].id === id) return COLORS[i];
+    return COLORS[0];
+  }
+
+  function colorLabel(c) { return c.code + " · " + pick(c.name); }
+
+  // Text colour that stays readable on top of a colour fill.
+  function onColor(hex) {
+    var n = parseInt(hex.slice(1), 16);
+    var lum = (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255;
+    return lum > 0.62 ? "#0b2a5b" : "#ffffff";
+  }
+
+  function renderSwatches() {
+    var host = document.getElementById("swatches");
+    if (!host) return;
+    host.textContent = "";
+    COLORS.forEach(function (c) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "swatch";
+      b.setAttribute("role", "radio");
+      b.setAttribute("data-color", c.id);
+      b.setAttribute("aria-label", colorLabel(c));
+      b.style.setProperty("--c", c.hex);
+      var dot = document.createElement("span");
+      dot.className = "sw-dot";
+      var code = document.createElement("span");
+      code.className = "sw-code";
+      code.textContent = c.code;
+      var nm = document.createElement("span");
+      nm.className = "sw-name";
+      nm.textContent = pick(c.name);
+      b.appendChild(dot);
+      b.appendChild(code);
+      b.appendChild(nm);
+      host.appendChild(b);
+    });
+  }
+
+  function renderFormColors() {
+    var sel = document.getElementById("formColor");
+    var keep = sel.value || colorId;
+    sel.textContent = "";
+    COLORS.forEach(function (c) {
+      var o = document.createElement("option");
+      o.value = c.id;
+      o.textContent = colorLabel(c);
+      sel.appendChild(o);
+    });
+    sel.value = keep;
+  }
+
   function updateColorName() {
+    var c = colorById(colorId);
     var nameEl = document.getElementById("colorName");
     if (!nameEl) return;
-    var name = t("color." + colorId);
-    nameEl.textContent = name;
-    document.getElementById("colorImg").alt = t("color.preview") + ": " + name;
+    nameEl.textContent = colorLabel(c);
+    var img = document.getElementById("colorImg");
+    if (img) img.alt = t("color.preview") + ": " + colorLabel(c);
+    var chip = document.getElementById("colorChip");
+    if (chip) {
+      chip.style.setProperty("--c", c.hex);
+      chip.style.color = onColor(c.hex);
+      chip.querySelector(".chip-code").textContent = c.code;
+      chip.querySelector(".chip-name").textContent = pick(c.name);
+    }
   }
 
   function selectColor(id) {
@@ -194,7 +260,7 @@
       b.tabIndex = on ? 0 : -1; // roving tabindex for the radio group
     });
     var img = document.getElementById("colorImg");
-    if (img) img.src = "assets/color-" + id + ".jpg";
+    if (img) img.src = img.getAttribute("data-img-base") + id + ".jpg";
     updateColorName();
     var sel = document.getElementById("formColor");
     if (sel) sel.value = id;
@@ -202,12 +268,16 @@
   window.selectColor = selectColor;
 
   function initColors() {
-    document.querySelectorAll(".swatch").forEach(function (b) {
-      b.addEventListener("click", function () { selectColor(b.getAttribute("data-color")); });
-    });
+    renderSwatches();
+    renderFormColors();
     document.getElementById("formColor").addEventListener("change", function (e) { selectColor(e.target.value); });
-    var group = document.querySelector(".swatches");
+    var group = document.getElementById("swatches");
     if (!group) return;
+    // One listener for the whole group: swatches are rebuilt when the language changes.
+    group.addEventListener("click", function (e) {
+      var b = e.target.closest(".swatch");
+      if (b) selectColor(b.getAttribute("data-color"));
+    });
     // Arrow keys move through the swatches like a native radio group.
     group.addEventListener("keydown", function (e) {
       var step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
@@ -251,7 +321,7 @@
     ];
     if (f.resort.value.trim()) lines.push(t("form.resort") + ": " + f.resort.value.trim());
     if (f.qty.value) lines.push(t("form.qty") + ": " + f.qty.value);
-    lines.push(t("form.color") + ": " + t("color." + f.color.value));
+    lines.push(t("form.color") + ": " + colorLabel(colorById(f.color.value)));
     if (f.note.value.trim()) lines.push(t("form.note") + ": " + f.note.value.trim());
     return lines.join("\n");
   }
@@ -329,6 +399,6 @@
     document.querySelectorAll("img[loading]").forEach(function (i) { i.loading = "eager"; });
     document.querySelectorAll(".spec-group").forEach(function (d) { d.open = true; });
   }
-  selectColor("white");
+  selectColor("ral9016");
   initReveal();
 })();

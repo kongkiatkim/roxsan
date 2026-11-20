@@ -25,6 +25,7 @@
       </a>
       <nav class="nav" aria-label="Main">
         <a href="#gallery" data-i18n="nav.gallery"></a>
+        <a href="#colors" data-i18n="nav.colors"></a>
         <a href="#why" data-i18n="nav.why"></a>
         <a href="#screen" data-i18n="nav.screen"></a>
         <a href="#specs" data-i18n="nav.specs"></a>
@@ -80,6 +81,24 @@
       </div>
     </section>
 
+
+    <section id="colors" class="section alt">
+      <div class="wrap">
+        <p class="eyebrow" data-i18n="colors.eyebrow"></p>
+        <h2 data-i18n="colors.title"></h2>
+        <p class="lead" data-i18n="colors.sub"></p>
+        <div class="colors reveal">
+          <div class="color-preview">
+            <img id="colorImg" src="assets/colors/2p2-ral9016.jpg" data-img-base="assets/colors/2p2-" alt="" data-i18n-alt="color.preview" width="1100" height="825">
+          </div>
+          <div class="color-panel">
+            <p class="color-name" id="colorName" aria-live="polite"></p>
+            <div class="swatches" id="swatches" role="radiogroup" data-i18n-aria-label="colors.group"></div>
+            <p class="note" data-i18n="colors.note"></p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="why" class="section">
       <div class="wrap">
@@ -159,13 +178,7 @@
           <div class="form-row">
             <label><span data-i18n="form.qty"></span><input name="qty" type="number" min="1" inputmode="numeric"></label>
             <label><span data-i18n="form.color"></span>
-              <select name="color" id="formColor">
-                <option value="white" data-i18n="color.white"></option>
-                <option value="black" data-i18n="color.black"></option>
-                <option value="grey" data-i18n="color.grey"></option>
-                <option value="powder" data-i18n="color.powder"></option>
-                <option value="turquoise" data-i18n="color.turquoise"></option>
-              </select>
+              <select name="color" id="formColor"></select>
             </label>
           </div>
           <label><span data-i18n="form.note"></span><textarea name="note" rows="3"></textarea></label>
@@ -203,6 +216,7 @@
   </dialog>
 
   <script src="js/config.js"></script>
+  <script src="js/colors.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/i18n-2plus2.js"></script>
   <script src="js/specs.js"></script>

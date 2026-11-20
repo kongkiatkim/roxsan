@@ -127,14 +127,23 @@ h2 { font-size: clamp(1.6rem, 4.4vw, 2.5rem); color: var(--navy); font-weight: 7
 .color-preview { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
 .color-preview img { width: 100%; height: auto; transition: opacity .25s ease; }
 .color-name { font: 700 1.5rem var(--font-th); color: var(--navy); margin-bottom: 14px; }
-.swatches { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 8px; }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 10px; margin-bottom: 8px; }
 .swatch {
-  width: 52px; height: 52px; border-radius: 50%; background: var(--c);
-  border: 3px solid #fff; box-shadow: 0 0 0 1.5px var(--line), 0 4px 10px rgba(0, 0, 0, .12);
-  cursor: pointer; transition: transform .15s ease, box-shadow .15s ease;
+  display: grid; justify-items: center; gap: 2px; padding: 10px 6px 8px; text-align: center;
+  background: #fff; border: 1.5px solid var(--line); border-radius: 12px; cursor: pointer;
+  font: inherit; color: var(--navy); transition: border-color .15s ease, box-shadow .15s ease;
 }
-.swatch:hover { transform: scale(1.08); }
-.swatch[aria-checked="true"] { box-shadow: 0 0 0 3px var(--navy), 0 4px 10px rgba(0, 0, 0, .12); }
+.sw-dot { width: 34px; height: 34px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .18); margin-bottom: 4px; }
+.sw-code { font-size: .78rem; font-weight: 700; letter-spacing: .02em; }
+.sw-name { font-size: .78rem; color: var(--muted); line-height: 1.25; }
+.swatch:hover { border-color: var(--sky); }
+.swatch[aria-checked="true"] { border-color: var(--navy); box-shadow: 0 0 0 2px var(--navy); }
+.color-chip {
+  aspect-ratio: 4 / 3; display: grid; place-content: center; text-align: center; gap: 4px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .28), rgba(0, 0, 0, .10)), var(--c, #f6f6f6);
+}
+.chip-code { font: 700 clamp(1.6rem, 5vw, 2.4rem) var(--font); letter-spacing: .02em; }
+.chip-name { font-size: 1.1rem; font-weight: 500; }
 
 /* Cards */
 .cards { display: grid; gap: 16px; margin-top: 28px; }

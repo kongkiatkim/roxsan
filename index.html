@@ -89,17 +89,11 @@
         <p class="lead" data-i18n="colors.sub"></p>
         <div class="colors reveal">
           <div class="color-preview">
-            <img id="colorImg" src="assets/color-white.jpg" alt="" data-i18n-alt="color.preview" width="350" height="420">
+            <div class="color-chip" id="colorChip"><span class="chip-code"></span><span class="chip-name"></span></div>
           </div>
           <div class="color-panel">
             <p class="color-name" id="colorName" aria-live="polite"></p>
-            <div class="swatches" role="radiogroup" data-i18n-aria-label="colors.group">
-              <button type="button" class="swatch" role="radio" aria-checked="true" data-color="white" data-i18n-aria-label="color.white" style="--c:#f4f6f8"></button>
-              <button type="button" class="swatch" role="radio" aria-checked="false" data-color="black" data-i18n-aria-label="color.black" style="--c:#14161a"></button>
-              <button type="button" class="swatch" role="radio" aria-checked="false" data-color="grey" data-i18n-aria-label="color.grey" style="--c:#8a929c"></button>
-              <button type="button" class="swatch" role="radio" aria-checked="false" data-color="powder" data-i18n-aria-label="color.powder" style="--c:#6fbdf3"></button>
-              <button type="button" class="swatch" role="radio" aria-checked="false" data-color="turquoise" data-i18n-aria-label="color.turquoise" style="--c:#12c3d6"></button>
-            </div>
+            <div class="swatches" id="swatches" role="radiogroup" data-i18n-aria-label="colors.group"></div>
             <p class="note" data-i18n="colors.note"></p>
           </div>
         </div>
@@ -184,13 +178,7 @@
           <div class="form-row">
             <label><span data-i18n="form.qty"></span><input name="qty" type="number" min="1" inputmode="numeric"></label>
             <label><span data-i18n="form.color"></span>
-              <select name="color" id="formColor">
-                <option value="white" data-i18n="color.white"></option>
-                <option value="black" data-i18n="color.black"></option>
-                <option value="grey" data-i18n="color.grey"></option>
-                <option value="powder" data-i18n="color.powder"></option>
-                <option value="turquoise" data-i18n="color.turquoise"></option>
-              </select>
+              <select name="color" id="formColor"></select>
             </label>
           </div>
           <label><span data-i18n="form.note"></span><textarea name="note" rows="3"></textarea></label>
@@ -228,6 +216,7 @@
   </dialog>
 
   <script src="js/config.js"></script>
+  <script src="js/colors.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/specs.js"></script>
   <script src="js/app.js"></script>
