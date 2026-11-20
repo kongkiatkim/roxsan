@@ -110,13 +110,11 @@
   }
 
   /* ---------- Lightbox ---------- */
-  var gallery = [
-    { src: "assets/hero.jpg", key: "gallery.1.alt" },
-    { src: "assets/rear-resort.jpg", key: "gallery.2.alt" },
-    { src: "assets/front-resort.jpg", key: "gallery.3.alt" },
-    { src: "assets/factory-1.jpg", key: "gallery.4.alt" },
-    { src: "assets/factory-2.jpg", key: "gallery.5.alt" }
-  ];
+  // Built from the page's own gallery buttons, so each model page lists its own photos.
+  var gallery = Array.prototype.map.call(document.querySelectorAll(".g-item"), function (b) {
+    var img = b.querySelector("img");
+    return { src: img.getAttribute("src"), key: img.getAttribute("data-i18n-alt") };
+  });
 
   function syncLightboxAlt() {
     document.getElementById("lbImg").alt = t(gallery[lbIndex].key);
@@ -170,9 +168,12 @@
   }
 
   /* ---------- Colour picker ---------- */
+  // The colour picker exists only on pages that have it (the 6+2 page); the quote form's colour list is on every page.
   function updateColorName() {
+    var nameEl = document.getElementById("colorName");
+    if (!nameEl) return;
     var name = t("color." + colorId);
-    document.getElementById("colorName").textContent = name;
+    nameEl.textContent = name;
     document.getElementById("colorImg").alt = t("color.preview") + ": " + name;
   }
 
@@ -185,7 +186,7 @@
       b.tabIndex = on ? 0 : -1; // roving tabindex for the radio group
     });
     var img = document.getElementById("colorImg");
-    img.src = "assets/color-" + id + ".jpg";
+    if (img) img.src = "assets/color-" + id + ".jpg";
     updateColorName();
     var sel = document.getElementById("formColor");
     if (sel) sel.value = id;
@@ -197,8 +198,10 @@
       b.addEventListener("click", function () { selectColor(b.getAttribute("data-color")); });
     });
     document.getElementById("formColor").addEventListener("change", function (e) { selectColor(e.target.value); });
+    var group = document.querySelector(".swatches");
+    if (!group) return;
     // Arrow keys move through the swatches like a native radio group.
-    document.querySelector(".swatches").addEventListener("keydown", function (e) {
+    group.addEventListener("keydown", function (e) {
       var step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
       if (!step) return;
       e.preventDefault();

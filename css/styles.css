@@ -86,6 +86,8 @@ html[lang="th"] .eyebrow { letter-spacing: .02em; text-transform: none; font-fam
 .lead { font-size: 1.08rem; color: var(--muted); max-width: 56ch; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 .hero-media img { width: 100%; height: auto; mix-blend-mode: multiply; }
+/* Location photos (not white-background cut-outs): no blend, rounded with a soft shadow. */
+.hero-media img.photo { mix-blend-mode: normal; border-radius: var(--radius); box-shadow: var(--shadow); }
 
 /* Facts */
 .facts { background: var(--navy); color: #fff; }
@@ -114,6 +116,8 @@ h2 { font-size: clamp(1.6rem, 4.4vw, 2.5rem); color: var(--navy); font-weight: 7
 .g-item { padding: 0; border: 0; border-radius: var(--radius); overflow: hidden; cursor: zoom-in; background: #eef3fa; aspect-ratio: 4/3; position: relative; }
 .g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
 .g-item:hover img { transform: scale(1.04); }
+.gallery.gallery-2 { grid-template-columns: 1fr; }
+@media (min-width: 640px) { .gallery.gallery-2 { grid-template-columns: repeat(2, 1fr); } }
 .g-1 { grid-column: 1 / -1; aspect-ratio: 16/10; }
 .g-1 img { object-fit: contain; background: #fff; }
 
